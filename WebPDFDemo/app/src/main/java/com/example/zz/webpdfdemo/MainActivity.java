@@ -54,7 +54,7 @@ public class MainActivity extends AppCompatActivity {
             public void run() {
                 if(judgeAndroidVersion()){                                         //5.0计算高度要通过获取缩放，然后计算
                     float scale = webView.getScale()-1;                           //TODO 这个减1的值要根据你们的HTML进行修改，看看修改完的高度是否覆盖了内容，尽量越小越好，否则会造成内存溢出的
-                    webViewHeight = (int) (webView.getPageHeight()*scale);
+                    webViewHeight = (int) (webView.getPageHeight()*1);
                 }else {
                     webViewHeight = webView.getPageHeight();
                 }
