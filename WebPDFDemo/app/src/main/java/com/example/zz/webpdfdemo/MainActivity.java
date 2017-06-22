@@ -34,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if(judgeAndroidVersion()){                                  //如果要是5.0手机以上，必须要使用该属性
+        if(judgeAndroidVersion()){                                  //如果要是5.0手机以上，必须要使用该属性,否则快照内容不全
            WebView.enableSlowWholeDocumentDraw();
         }
         setContentView(R.layout.activity_main);
@@ -52,8 +52,8 @@ public class MainActivity extends AppCompatActivity {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                if(judgeAndroidVersion()){                                         //5.0计算高度要通过获取缩放，然后计算
-                    float scale = webView.getScale()-1;                           //TODO 这个减1的值要根据你们的HTML进行修改，看看修改完的高度是否覆盖了内容，尽量越小越好，否则会造成内存溢出的
+                if(judgeAndroidVersion()){                                         //可以通过获取缩放，然后设置值从而控制webview快照的高度
+                    float scale = webView.getScale()-1;                        
                     webViewHeight = (int) (webView.getPageHeight()*1);
                 }else {
                     webViewHeight = webView.getPageHeight();
@@ -64,7 +64,7 @@ public class MainActivity extends AppCompatActivity {
                 new Thread(new Runnable() {
                     @Override
                     public void run() {
-                        saveBitmapFile(bitmap,"/webview.jpg");                         //把整体的图片保存到SD下
+                        saveBitmapFile(bitmap,"/webview.jpg");                         //把整体的图片保存到本地下
                         convertPDF(bitmap);
                     }
                 }).start();
